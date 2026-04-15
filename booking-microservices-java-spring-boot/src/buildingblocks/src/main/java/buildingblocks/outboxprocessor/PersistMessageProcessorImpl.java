@@ -88,12 +88,21 @@ public class PersistMessageProcessorImpl implements PersistMessageProcessor {
       return;
     }
 
-    boolean processed = switch (deliveryType) {
-      case Internal -> processInternal(message);
-      case Outbox -> processOutbox(message);
-      case Inbox -> processInbox(message);
-      default -> false;
-    };
+    boolean processed;
+    switch (deliveryType) {
+      case Internal:
+        processed = processInternal(message);
+        break;
+      case Outbox:
+        processed = processOutbox(message);
+        break;
+      case Inbox:
+        processed = processInbox(message);
+        break;
+      default:
+        processed = false;
+        break;
+    }
 
     if (processed) {
       changeMessageStatus(message, MessageStatus.Processed);

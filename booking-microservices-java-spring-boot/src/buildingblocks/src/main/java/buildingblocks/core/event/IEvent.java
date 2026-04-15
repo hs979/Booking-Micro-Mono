@@ -14,12 +14,12 @@ public interface IEvent {
 
     // Generate or retrieve the unique eventId for the instance
     default UUID getEventId() {
-        return EVENT_IDS.computeIfAbsent(this, _ -> UuidCreator.getTimeOrderedEpoch());
+        return EVENT_IDS.computeIfAbsent(this, key -> UuidCreator.getTimeOrderedEpoch());
     }
 
     // Retrieve the unique occurredOn for the instance
     default LocalDateTime getOccurredOn() {
-        return EVENT_OCCURRED.computeIfAbsent(this, _ ->  LocalDateTime.now());
+        return EVENT_OCCURRED.computeIfAbsent(this, key -> LocalDateTime.now());
     }
 
     default String getEventType() {

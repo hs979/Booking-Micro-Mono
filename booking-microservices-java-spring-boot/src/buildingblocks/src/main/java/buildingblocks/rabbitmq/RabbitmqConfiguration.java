@@ -133,23 +133,30 @@ public class RabbitmqConfiguration {
   }
 
   private static void declareBindings(RabbitAdmin rabbitAdmin, Queue queue, Exchange exchange, String routingKey) {
-    switch (exchange) {
-      case TopicExchange topicExchange -> rabbitAdmin.declareBinding(BindingBuilder.bind(queue).to(topicExchange).with(routingKey));
-      case DirectExchange directExchange -> rabbitAdmin.declareBinding(BindingBuilder.bind(queue).to(directExchange).with(routingKey));
-      case FanoutExchange fanoutExchange -> rabbitAdmin.declareBinding(BindingBuilder.bind(queue).to(fanoutExchange));
-      case null, default -> throw new IllegalArgumentException("Unsupported exchange type for binding");
-    };
+    if (exchange instanceof TopicExchange topicExchange) {
+      rabbitAdmin.declareBinding(BindingBuilder.bind(queue).to(topicExchange).with(routingKey));
+    } else if (exchange instanceof DirectExchange directExchange) {
+      rabbitAdmin.declareBinding(BindingBuilder.bind(queue).to(directExchange).with(routingKey));
+    } else if (exchange instanceof FanoutExchange fanoutExchange) {
+      rabbitAdmin.declareBinding(BindingBuilder.bind(queue).to(fanoutExchange));
+    } else {
+      throw new IllegalArgumentException("Unsupported exchange type for binding");
+    }
   }
 
   private Exchange declareExchange(RabbitAdmin rabbitAdmin) {
-    Exchange exchange = switch (exchangeType.toLowerCase()) {
-      case "direct" ->
-        new DirectExchange(rabbitProperties.getTemplate().getExchange());
-      case "fanout" ->
-        new FanoutExchange(rabbitProperties.getTemplate().getExchange());
-      default ->
-        new TopicExchange(rabbitProperties.getTemplate().getExchange());
-    };
+    Exchange exchange;
+    switch (exchangeType.toLowerCase()) {
+      case "direct":
+        exchange = new DirectExchange(rabbitProperties.getTemplate().getExchange());
+        break;
+      case "fanout":
+        exchange = new FanoutExchange(rabbitProperties.getTemplate().getExchange());
+        break;
+      default:
+        exchange = new TopicExchange(rabbitProperties.getTemplate().getExchange());
+        break;
+    }
 
     rabbitAdmin.declareExchange(exchange);
 

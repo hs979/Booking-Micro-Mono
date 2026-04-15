@@ -11,5 +11,5 @@ import java.util.UUID;
 
 @Repository
 public interface AircraftRepository extends JpaRepository<AircraftEntity, UUID> {
-  AircraftEntity findAircraftByModelAndIsDeletedFalse(String model);
+  AircraftEntity findAircraftByModel_ModelAndIsDeletedFalse(String model);
 }

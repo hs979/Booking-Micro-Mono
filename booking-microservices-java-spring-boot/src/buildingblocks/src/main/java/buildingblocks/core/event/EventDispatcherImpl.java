@@ -33,12 +33,12 @@ public class EventDispatcherImpl implements EventDispatcher {
 
     @Override
     public <T extends DomainEvent> void send(List<T> domainEvents, Class<?> eventType) {
-        List<IntegrationEvent> integrationEvents = domainEvents.stream().map(eventMapper::MapToIntegrationEvent).toList();
+        List<IntegrationEvent> integrationEvents = domainEvents.stream().map(eventMapper::MapToIntegrationEvent).filter(Objects::nonNull).toList();
 
         integrationEvents.forEach(persistMessageProcessor::publishMessage);
 
         if (InternalCommand.class.isAssignableFrom(eventType)) {
-            List<InternalCommand> internalCommands = domainEvents.stream().map(eventMapper::MapToInternalCommand).toList();
+            List<InternalCommand> internalCommands = domainEvents.stream().map(eventMapper::MapToInternalCommand).filter(Objects::nonNull).toList();
             internalCommands.forEach(persistMessageProcessor::addInternalMessage);
         }
     }

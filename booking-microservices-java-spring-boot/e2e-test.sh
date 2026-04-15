@@ -272,10 +272,10 @@ RESPONSE=$(curl -s -w "\n%{http_code}" -X POST "${PASSENGER_API}/api/v1/passenge
     -H "Content-Type: application/json" \
     -H "$AUTH_HEADER" \
     -d '{
-        "name": "John Doe",
-        "passportNumber": "CN12345678",
-        "passengerType": 1,
-        "age": 35
+    "name": "John Doe",
+    "PassportNumber": "CN12345678",
+    "passengerType": "Male",
+    "age": 35
     }')
 HTTP_CODE=$(echo "$RESPONSE" | tail -1)
 BODY=$(echo "$RESPONSE" | sed '$d')

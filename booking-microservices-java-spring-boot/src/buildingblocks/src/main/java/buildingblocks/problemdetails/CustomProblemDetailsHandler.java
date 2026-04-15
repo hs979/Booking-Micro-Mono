@@ -41,49 +41,22 @@ public class CustomProblemDetailsHandler extends ResponseEntityExceptionHandler 
     record ExceptionDetails(String detail, String title, HttpStatus status) {
     }
 
-    ExceptionDetails details = switch (ex) {
-      case ConflictException conflictEx -> new ExceptionDetails(
-        conflictEx.getMessage(),
-        conflictEx.getClass().getSimpleName(),
-        HttpStatus.CONFLICT
-      );
-
-      case ValidationException validationEx -> new ExceptionDetails(
-        validationEx.getMessage(),
-        validationEx.getClass().getSimpleName(),
-        HttpStatus.BAD_REQUEST
-      );
-
-      case BadRequestException badRequestEx -> new ExceptionDetails(
-        badRequestEx.getMessage(),
-        badRequestEx.getClass().getSimpleName(),
-        HttpStatus.BAD_REQUEST
-      );
-
-      case NotFoundException notFoundEx -> new ExceptionDetails(
-        notFoundEx.getMessage(),
-        notFoundEx.getClass().getSimpleName(),
-        HttpStatus.NOT_FOUND
-      );
-
-      case OptimisticLockException concurrencyEx -> new ExceptionDetails(
-        concurrencyEx.getMessage(),
-        concurrencyEx.getClass().getSimpleName(),
-        HttpStatus.CONFLICT
-      );
-
-      case io.grpc.StatusRuntimeException grpcEx -> new ExceptionDetails(
-        grpcEx.getMessage(),
-        "GrpcException",
-        HttpStatus.BAD_REQUEST
-      );
-
-      default -> new ExceptionDetails(
-        ex.getMessage(),
-        ex.getClass().getSimpleName(),
-        HttpStatus.INTERNAL_SERVER_ERROR
-      );
-    };
+    ExceptionDetails details;
+    if (ex instanceof ConflictException conflictEx) {
+      details = new ExceptionDetails(conflictEx.getMessage(), conflictEx.getClass().getSimpleName(), HttpStatus.CONFLICT);
+    } else if (ex instanceof ValidationException validationEx) {
+      details = new ExceptionDetails(validationEx.getMessage(), validationEx.getClass().getSimpleName(), HttpStatus.BAD_REQUEST);
+    } else if (ex instanceof BadRequestException badRequestEx) {
+      details = new ExceptionDetails(badRequestEx.getMessage(), badRequestEx.getClass().getSimpleName(), HttpStatus.BAD_REQUEST);
+    } else if (ex instanceof NotFoundException notFoundEx) {
+      details = new ExceptionDetails(notFoundEx.getMessage(), notFoundEx.getClass().getSimpleName(), HttpStatus.NOT_FOUND);
+    } else if (ex instanceof OptimisticLockException concurrencyEx) {
+      details = new ExceptionDetails(concurrencyEx.getMessage(), concurrencyEx.getClass().getSimpleName(), HttpStatus.CONFLICT);
+    } else if (ex instanceof io.grpc.StatusRuntimeException grpcEx) {
+      details = new ExceptionDetails(grpcEx.getMessage(), "GrpcException", HttpStatus.BAD_REQUEST);
+    } else {
+      details = new ExceptionDetails(ex.getMessage(), ex.getClass().getSimpleName(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
     ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
       details.status(),

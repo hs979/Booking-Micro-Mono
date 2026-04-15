@@ -19,16 +19,22 @@ import org.springframework.stereotype.Component;
 public class EventMapperImpl implements EventMapper {
   @Override
   public IntegrationEvent MapToIntegrationEvent(@NotNull DomainEvent event) {
-      return switch (event) {
-        case FlightCreatedDomainEvent e -> new FlightCreated(e.id());
-        case FlightUpdatedDomainEvent e -> new FlightUpdated(e.id(), e.flightNumber(), e.aircraftId(), e.departureAirportId(), e.arriveAirportId(), e.flightDate(), e.price());
-        case FlightDeletedDomainEvent e -> new FlightDeleted(e.id());
-        case AirportCreatedDomainEvent e -> new AirportCreated(e.id());
-        case AircraftCreatedDomainEvent e -> new AircraftCreated(e.id());
-        case SeatCreatedDomainEvent e -> new SeatCreated(e.id());
-        case SeatReservedDomainEvent e -> new SeatReserved(e.id());
-        default -> null;
-      };
+      if (event instanceof FlightCreatedDomainEvent e) {
+        return new FlightCreated(e.id());
+      } else if (event instanceof FlightUpdatedDomainEvent e) {
+        return new FlightUpdated(e.id(), e.flightNumber(), e.aircraftId(), e.departureAirportId(), e.arriveAirportId(), e.flightDate(), e.price());
+      } else if (event instanceof FlightDeletedDomainEvent e) {
+        return new FlightDeleted(e.id());
+      } else if (event instanceof AirportCreatedDomainEvent e) {
+        return new AirportCreated(e.id());
+      } else if (event instanceof AircraftCreatedDomainEvent e) {
+        return new AircraftCreated(e.id());
+      } else if (event instanceof SeatCreatedDomainEvent e) {
+        return new SeatCreated(e.id());
+      } else if (event instanceof SeatReservedDomainEvent e) {
+        return new SeatReserved(e.id());
+      }
+      return null;
   }
 
   @Override

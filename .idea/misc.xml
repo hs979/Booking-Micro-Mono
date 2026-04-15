@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/booking-microservices-java-spring-boot/src/services/flight/pom.xml" />
+        <option value="$PROJECT_DIR$/booking-microservices-java-spring-boot/src/services/booking/pom.xml" />
+        <option value="$PROJECT_DIR$/booking-microservices-java-spring-boot/src/services/passenger/pom.xml" />
+        <option value="$PROJECT_DIR$/booking-microservices-java-spring-boot/src/apigateway/pom.xml" />
+        <option value="$PROJECT_DIR$/booking-microservices-java-spring-boot/src/buildingblocks/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

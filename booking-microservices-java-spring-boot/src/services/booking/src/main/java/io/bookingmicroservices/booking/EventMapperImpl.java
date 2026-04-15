@@ -12,10 +12,10 @@ import org.springframework.stereotype.Component;
 public class EventMapperImpl implements EventMapper {
     @Override
     public IntegrationEvent MapToIntegrationEvent(DomainEvent event) {
-        return switch (event) {
-            case BookingCreatedDomainEvent e -> new BookingCreated(e.id());
-            default -> null;
-        };
+        if (event instanceof BookingCreatedDomainEvent e) {
+            return new BookingCreated(e.id());
+        }
+        return null;
     }
 
     @Override

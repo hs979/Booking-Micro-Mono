@@ -34,7 +34,7 @@ public class ValidationPipelineBehavior<TRequest extends IRequest<TResponse>, TR
             BindingResult bindingResult = dataBinder.getBindingResult();
 
             if (bindingResult.hasErrors()) {
-                throw new ValidationException(bindingResult.getAllErrors().getFirst().getDefaultMessage());
+                throw new ValidationException(bindingResult.getAllErrors().get(0).getDefaultMessage());
             }
         }
 

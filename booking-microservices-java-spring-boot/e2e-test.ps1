@@ -208,7 +208,7 @@ $updateBody = @{
     isDeleted = $false
 } | ConvertTo-Json
 $r = Invoke-Api -Method PUT -Uri "${FLIGHT_API}/api/v1/flight/${FLIGHT_ID}" -Headers $authHeaders -Body $updateBody
-Check-Response "Update Flight" $r.StatusCode 200 $r.Body
+Check-Response "Update Flight" $r.StatusCode 204 $r.Body
 
 # ============================================================================
 # Step 8: Flight Service - Create Seat
@@ -240,7 +240,7 @@ Check-Response "Get Available Seats" $r.StatusCode 200 $r.Body
 Print-Header "Step 10: Passenger Service - Register Passenger"
 
 Print-Test "Register Passenger"
-$r = Invoke-Api -Method POST -Uri "${PASSENGER_API}/api/v1/passenger" -Headers $authHeaders -Body '{"name":"John Doe","passportNumber":"CN12345678","passengerType":1,"age":35}'
+$r = Invoke-Api -Method POST -Uri "${PASSENGER_API}/api/v1/passenger" -Headers $authHeaders -Body '{"name":"John Doe","PassportNumber":"CN12345678","passengerType":"Male","age":35}'
 Check-Response "Register Passenger" $r.StatusCode 200 $r.Body
 $PASSENGER_ID = ($r.Body | ConvertFrom-Json).id
 Write-Host "  Passenger ID: $PASSENGER_ID"
@@ -325,7 +325,7 @@ $TEMP_FLIGHT_ID = ($r.Body | ConvertFrom-Json).id
 
 Print-Test "Delete Flight"
 $r = Invoke-Api -Method DELETE -Uri "${FLIGHT_API}/api/v1/flight/${TEMP_FLIGHT_ID}" -Headers $authHeaders
-Check-Response "Delete Flight" $r.StatusCode 200 $r.Body
+Check-Response "Delete Flight" $r.StatusCode 204 $r.Body
 
 # ============================================================================
 # Step 16: Gateway Tests

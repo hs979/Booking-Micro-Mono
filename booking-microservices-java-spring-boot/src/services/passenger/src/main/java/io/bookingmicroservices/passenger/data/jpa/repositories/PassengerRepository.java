@@ -11,6 +11,6 @@ import java.util.UUID;
 
 @Repository
 public interface PassengerRepository extends JpaRepository<PassengerEntity, UUID> {
-    PassengerEntity findPassengerByPassportNumberAndIsDeletedFalse(String passportNumber);
+    PassengerEntity findPassengerByPassportNumber_PassportNumberAndIsDeletedFalse(String passportNumber);
     PassengerEntity findPassengerByIdAndIsDeletedFalse(UUID id);
 }

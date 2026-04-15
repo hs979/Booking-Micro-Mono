@@ -49,10 +49,11 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
   }
 
   private HttpStatus getStatus(AuthenticationException exception) {
-    return switch (exception) {
-      case BadCredentialsException e -> HttpStatus.UNAUTHORIZED;
-      case InsufficientAuthenticationException e -> HttpStatus.FORBIDDEN;
-      default -> HttpStatus.UNAUTHORIZED;
-    };
+    if (exception instanceof BadCredentialsException) {
+      return HttpStatus.UNAUTHORIZED;
+    } else if (exception instanceof InsufficientAuthenticationException) {
+      return HttpStatus.FORBIDDEN;
+    }
+    return HttpStatus.UNAUTHORIZED;
   }
 }

@@ -24,7 +24,7 @@ public class CreatePassengerCommandHandler implements ICommandHandler<CreatePass
     @Override
     public PassengerDto handle(CreatePassengerCommand command) {
 
-        PassengerEntity existPassenger = passengerRepository.findPassengerByPassportNumberAndIsDeletedFalse(command.passportNumber());
+        PassengerEntity existPassenger = passengerRepository.findPassengerByPassportNumber_PassportNumberAndIsDeletedFalse(command.passportNumber());
         if (existPassenger != null) {
          throw new PassengerAlreadyExistException();
         }

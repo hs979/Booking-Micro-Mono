@@ -40,12 +40,14 @@ public class TestFixture {
     }
 
 
+    @SuppressWarnings("unchecked")
     public <TResponse> TResponse send(IRequest<TResponse> request) {
-        return switch (request) {
-            case ICommand<TResponse> command -> mediator.send(command);
-            case IQuery<TResponse> query -> mediator.send(query);
-            default -> mediator.send(request);
-        };
+        if (request instanceof ICommand) {
+            return mediator.send((ICommand<TResponse>) request);
+        } else if (request instanceof IQuery) {
+            return mediator.send((IQuery<TResponse>) request);
+        }
+        return mediator.send(request);
     }
 
     public boolean messageIsPublished(Class<?> messageType) {

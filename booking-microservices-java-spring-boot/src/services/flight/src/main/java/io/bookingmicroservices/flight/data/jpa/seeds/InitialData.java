@@ -43,7 +43,7 @@ public class InitialData {
 
     flights = new ArrayList<>();
     flights.add(new FlightEntity(UUID.fromString("3c5c0000-97c6-fc34-2eb9-08db322230c9"), new FlightNumber("BD467"),
-      new AircraftId(aircrafts.getFirst().getId()), new AirportId(airports.getFirst().getId()), new AirportId(airports.getLast().getId()), new DurationMinutes(new BigDecimal(120)), FlightStatus.Completed, new Price(new BigDecimal(8000)), new ArriveDate(LocalDateTime.of(2022, 1, 31, 12, 0)),
+      new AircraftId(aircrafts.get(0).getId()), new AirportId(airports.get(0).getId()), new AirportId(airports.get(airports.size() - 1).getId()), new DurationMinutes(new BigDecimal(120)), FlightStatus.Completed, new Price(new BigDecimal(8000)), new ArriveDate(LocalDateTime.of(2022, 1, 31, 12, 0)),
       new DepartureDate(LocalDateTime.of(2022, 1, 31, 14, 0)),
       new FlightDate(LocalDateTime.of(2022, 1, 31, 13, 0))));
 
