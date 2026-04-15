@@ -1,0 +1,273 @@
+{
+  "_description": "公共模块 (buildingblocks) 中的类/包与使用它们的微服务之间的映射。'usedBy' 表示在微服务架构中哪些服务直接使用了该类/包。'status' 标注在单体转换中该类的处置方式。",
+
+  "buildingblocks.core.model": {
+    "classes": [
+      "buildingblocks.core.model.BaseEntity",
+      "buildingblocks.core.model.AggregateRoot"
+    ],
+    "usedBy": ["flight-service", "passenger-service", "booking-service"],
+    "status": "保留不变"
+  },
+
+  "buildingblocks.core.event": {
+    "classes": [
+      "buildingblocks.core.event.DomainEvent",
+      "buildingblocks.core.event.IntegrationEvent",
+      "buildingblocks.core.event.InternalCommand",
+      "buildingblocks.core.event.IEvent",
+      "buildingblocks.core.event.EventMapper",
+      "buildingblocks.core.event.EventDispatcher",
+      "buildingblocks.core.event.EventDispatcherConfiguration"
+    ],
+    "usedBy": ["flight-service", "passenger-service", "booking-service"],
+    "status": "保留不变"
+  },
+
+  "buildingblocks.core.event.EventDispatcherImpl": {
+    "classes": [
+      "buildingblocks.core.event.EventDispatcherImpl"
+    ],
+    "usedBy": ["flight-service", "passenger-service", "booking-service"],
+    "status": "重构：PersistMessageProcessor 依赖替换为 ApplicationEventPublisher"
+  },
+
+  "buildingblocks.core.exception": {
+    "classes": [
+      "buildingblocks.core.exception.CustomException",
+      "buildingblocks.core.exception.AppException",
+      "buildingblocks.core.exception.BadRequestException",
+      "buildingblocks.core.exception.ValidationException",
+      "buildingblocks.core.exception.NotFoundException",
+      "buildingblocks.core.exception.ConflictException",
+      "buildingblocks.core.exception.InternalServerException",
+      "buildingblocks.core.exception.AggregateNotFoundException"
+    ],
+    "usedBy": ["flight-service", "passenger-service", "booking-service"],
+    "status": "保留不变"
+  },
+
+  "buildingblocks.mediator": {
+    "classes": [
+      "buildingblocks.mediator.Mediator",
+      "buildingblocks.mediator.MediatorConfiguration",
+      "buildingblocks.mediator.MediatorProperties",
+      "buildingblocks.mediator.MediatorRoot",
+      "buildingblocks.mediator.abstractions.IMediator",
+      "buildingblocks.mediator.abstractions.ISender",
+      "buildingblocks.mediator.abstractions.IPublisher",
+      "buildingblocks.mediator.abstractions.commands.ICommand",
+      "buildingblocks.mediator.abstractions.commands.ICommandHandler",
+      "buildingblocks.mediator.abstractions.commands.IBaseCommand",
+      "buildingblocks.mediator.abstractions.commands.ICommandUnit",
+      "buildingblocks.mediator.abstractions.commands.ICommandUnitHandler",
+      "buildingblocks.mediator.abstractions.queries.IQuery",
+      "buildingblocks.mediator.abstractions.queries.IQueryHandler",
+      "buildingblocks.mediator.abstractions.queries.IBaseQuery",
+      "buildingblocks.mediator.abstractions.requests.IRequest",
+      "buildingblocks.mediator.abstractions.requests.IRequestHandler",
+      "buildingblocks.mediator.abstractions.requests.IPipelineBehavior",
+      "buildingblocks.mediator.abstractions.requests.RequestHandlerDelegate",
+      "buildingblocks.mediator.abstractions.requests.IBaseRequest",
+      "buildingblocks.mediator.abstractions.requests.IRequestUnit",
+      "buildingblocks.mediator.abstractions.requests.IRequestUnitHandler",
+      "buildingblocks.mediator.abstractions.requests.Unit",
+      "buildingblocks.mediator.abstractions.notifications.INotification",
+      "buildingblocks.mediator.abstractions.notifications.INotificationHandler",
+      "buildingblocks.mediator.abstractions.notifications.INotificationPipelineBehavior",
+      "buildingblocks.mediator.abstractions.notifications.NotificationHandlerDelegate",
+      "buildingblocks.mediator.behaviors.LogPipelineBehavior",
+      "buildingblocks.mediator.behaviors.TransactionPipelineBehavior",
+      "buildingblocks.mediator.behaviors.ValidationPipelineBehavior"
+    ],
+    "usedBy": ["flight-service", "passenger-service", "booking-service"],
+    "status": "保留不变"
+  },
+
+  "buildingblocks.contracts.flight": {
+    "classes": [
+      "buildingblocks.contracts.flight.FlightCreated",
+      "buildingblocks.contracts.flight.FlightUpdated",
+      "buildingblocks.contracts.flight.FlightDeleted",
+      "buildingblocks.contracts.flight.AircraftCreated",
+      "buildingblocks.contracts.flight.AirportCreated",
+      "buildingblocks.contracts.flight.SeatCreated",
+      "buildingblocks.contracts.flight.SeatReserved"
+    ],
+    "usedBy": ["flight-service", "booking-service"],
+    "usageDetail": {
+      "flight-service": "生产方 — EventMapperImpl 将 domain events 映射为这些 integration events",
+      "booking-service": "消费方 — FlightUpdatedListener 和 FlightDeletedListener 监听 FlightUpdated 和 FlightDeleted"
+    },
+    "status": "保留不变"
+  },
+
+  "buildingblocks.contracts.passenger": {
+    "classes": [
+      "buildingblocks.contracts.passenger.PassengerCreated"
+    ],
+    "usedBy": ["passenger-service"],
+    "usageDetail": {
+      "passenger-service": "生产方 — EventMapperImpl 将 PassengerCreatedDomainEvent 映射为 PassengerCreated"
+    },
+    "status": "保留不变"
+  },
+
+  "buildingblocks.contracts.booking": {
+    "classes": [
+      "buildingblocks.contracts.booking.BookingCreated"
+    ],
+    "usedBy": ["booking-service"],
+    "usageDetail": {
+      "booking-service": "生产方 — EventMapperImpl 将 BookingCreatedDomainEvent 映射为 BookingCreated"
+    },
+    "status": "保留不变"
+  },
+
+  "buildingblocks.jpa": {
+    "classes": [
+      "buildingblocks.jpa.JpaConfiguration",
+      "buildingblocks.jpa.JpaAuditorAwareImpl",
+      "buildingblocks.jpa.HibernateGlobalFilter"
+    ],
+    "usedBy": ["flight-service", "passenger-service", "booking-service"],
+    "status": "保留不变"
+  },
+
+  "buildingblocks.keycloak": {
+    "classes": [
+      "buildingblocks.keycloak.KeycloakConfiguration",
+      "buildingblocks.keycloak.KeycloakRoleConverter",
+      "buildingblocks.keycloak.KeycloakScopeConverter",
+      "buildingblocks.keycloak.CustomAuthenticationEntryPoint"
+    ],
+    "usedBy": ["flight-service", "passenger-service", "booking-service", "api-gateway"],
+    "usageDetail": {
+      "api-gateway": "使用独立的 KeycloakGatewayConfiguration (WebFlux)，不直接使用此 Servlet 版配置",
+      "flight-service/passenger-service/booking-service": "通过 *Configurations.java @Import 引入"
+    },
+    "status": "保留不变"
+  },
+
+  "buildingblocks.flyway": {
+    "classes": [
+      "buildingblocks.flyway.FlywayConfiguration"
+    ],
+    "usedBy": ["flight-service", "passenger-service", "booking-service"],
+    "status": "保留不变"
+  },
+
+  "buildingblocks.problemdetails": {
+    "classes": [
+      "buildingblocks.problemdetails.CustomProblemDetailsHandler"
+    ],
+    "usedBy": ["flight-service", "passenger-service", "booking-service"],
+    "status": "修改：移除了 io.grpc.StatusRuntimeException 的异常处理分支"
+  },
+
+  "buildingblocks.swagger": {
+    "classes": [
+      "buildingblocks.swagger.SwaggerConfiguration"
+    ],
+    "usedBy": ["flight-service", "passenger-service", "booking-service"],
+    "status": "保留不变"
+  },
+
+  "buildingblocks.logger": {
+    "classes": [
+      "buildingblocks.logger.LoggerConfiguration"
+    ],
+    "usedBy": ["flight-service", "passenger-service", "booking-service"],
+    "status": "保留不变"
+  },
+
+  "buildingblocks.otel.collector": {
+    "classes": [
+      "buildingblocks.otel.collector.OtelCollectorConfiguration",
+      "buildingblocks.otel.collector.OtelCollectorOptions"
+    ],
+    "usedBy": ["flight-service", "passenger-service", "booking-service"],
+    "status": "保留不变"
+  },
+
+  "buildingblocks.web": {
+    "classes": [
+      "buildingblocks.web.WebClientConfiguration"
+    ],
+    "usedBy": ["flight-service", "passenger-service", "booking-service"],
+    "status": "保留不变"
+  },
+
+  "buildingblocks.threadpool": {
+    "classes": [
+      "buildingblocks.threadpool.ThreadPoolConfiguration"
+    ],
+    "usedBy": ["flight-service", "passenger-service", "booking-service"],
+    "status": "保留不变"
+  },
+
+  "buildingblocks.testbase": {
+    "classes": [
+      "buildingblocks.testbase.TestBase",
+      "buildingblocks.testbase.TestContainers",
+      "buildingblocks.testbase.TestFixture",
+      "buildingblocks.testbase.UnitTestBase"
+    ],
+    "usedBy": ["flight-service"],
+    "usageDetail": {
+      "flight-service": "flight 服务有 unit/integration/e2e 测试使用 TestBase 和 TestFixture"
+    },
+    "status": "修改：移除了 RabbitMQ 容器和 outbox 相关的测试辅助方法"
+  },
+
+  "buildingblocks.utils": {
+    "classes": [
+      "buildingblocks.utils.bean.SpringBeanUtils",
+      "buildingblocks.utils.jsonconverter.JsonConverterUtils",
+      "buildingblocks.utils.reflection.ReflectionUtils",
+      "buildingblocks.utils.validation.ValidationUtils"
+    ],
+    "usedBy": ["flight-service", "passenger-service", "booking-service"],
+    "status": "修改：JsonConverterUtils 移除了 AMQP 相关导入"
+  },
+
+  "_removed_packages": {
+    "_description": "以下公共模块包在单体转换中被整体移除",
+    "buildingblocks.rabbitmq": {
+      "classes": [
+        "buildingblocks.rabbitmq.RabbitmqConfiguration",
+        "buildingblocks.rabbitmq.MessageHandler"
+      ],
+      "usedBy": ["flight-service", "passenger-service", "booking-service"],
+      "reason": "RabbitMQ 消息中间件在单体中被 ApplicationEventPublisher 替代"
+    },
+    "buildingblocks.outboxprocessor": {
+      "classes": [
+        "buildingblocks.outboxprocessor.PersistMessageProcessor",
+        "buildingblocks.outboxprocessor.PersistMessageProcessorImpl",
+        "buildingblocks.outboxprocessor.PersistMessageProcessorConfiguration",
+        "buildingblocks.outboxprocessor.PersistMessageBackgroundJob",
+        "buildingblocks.outboxprocessor.PersistMessageEntity",
+        "buildingblocks.outboxprocessor.MessageStatus",
+        "buildingblocks.outboxprocessor.MessageDeliveryType"
+      ],
+      "usedBy": ["flight-service", "passenger-service", "booking-service"],
+      "reason": "Outbox 模式在进程内事件分发场景下不再需要"
+    },
+    "buildingblocks.r2dbc": {
+      "classes": [
+        "buildingblocks.r2dbc.R2dbcConfiguration",
+        "buildingblocks.r2dbc.ReactiveAuditorAwareImpl"
+      ],
+      "usedBy": [],
+      "reason": "R2DBC 未被任何服务实际使用"
+    },
+    "buildingblocks.utils.protobuf": {
+      "classes": [
+        "buildingblocks.utils.protobuf.ProtobufUtils"
+      ],
+      "usedBy": ["flight-service"],
+      "reason": "仅在 gRPC 映射中使用，单体中不再需要 protobuf 转换"
+    }
+  }
+}

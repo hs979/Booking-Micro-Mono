@@ -1,0 +1,15 @@
+package io.bookingmonolith.flight.data.jpa.repositories;
+
+import io.bookingmonolith.flight.airports.features.Mappings;
+import io.bookingmonolith.flight.airports.models.Airport;
+import io.bookingmonolith.flight.data.jpa.entities.AirportEntity;
+import jakarta.persistence.EntityManager;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import java.util.UUID;
+
+
+@Repository
+public interface AirportRepository extends JpaRepository<AirportEntity, UUID> {
+  AirportEntity findAirportByCode_CodeAndIsDeletedFalse(String code);
+}

@@ -1,0 +1,301 @@
+{
+  "_description": "微服务到单体的类映射。key 是微服务名，value 中 'migrated' 列出迁移到单体中的类（包名保持不变），'removed' 列出在转换过程中被删除的类及删除原因，'replacedBy' 说明被哪些新类替代。",
+
+  "flight-service": {
+    "migrated": [
+      "io.bookingmonolith.flight.aircrafts.dtos.AircraftDto",
+      "io.bookingmonolith.flight.aircrafts.exceptions.AircraftAlreadyExistException",
+      "io.bookingmonolith.flight.aircrafts.exceptions.InvalidAircraftIdException",
+      "io.bookingmonolith.flight.aircrafts.features.createaircraft.AircraftCreatedDomainEvent",
+      "io.bookingmonolith.flight.aircrafts.features.createaircraft.CreateAircraftCommand",
+      "io.bookingmonolith.flight.aircrafts.features.createaircraft.CreateAircraftCommandHandler",
+      "io.bookingmonolith.flight.aircrafts.features.createaircraft.CreateAircraftCommandValidator",
+      "io.bookingmonolith.flight.aircrafts.features.createaircraft.CreateAircraftController",
+      "io.bookingmonolith.flight.aircrafts.features.createaircraft.CreateAircraftRequestDto",
+      "io.bookingmonolith.flight.aircrafts.features.Mappings",
+      "io.bookingmonolith.flight.aircrafts.models.Aircraft",
+      "io.bookingmonolith.flight.aircrafts.valueobjects.AircraftId",
+      "io.bookingmonolith.flight.aircrafts.valueobjects.ManufacturingYear",
+      "io.bookingmonolith.flight.aircrafts.valueobjects.Model",
+      "io.bookingmonolith.flight.aircrafts.valueobjects.Name",
+      "io.bookingmonolith.flight.airports.dtos.AirportDto",
+      "io.bookingmonolith.flight.airports.exceptions.AirportAlreadyExistException",
+      "io.bookingmonolith.flight.airports.exceptions.InvalidAirportIdException",
+      "io.bookingmonolith.flight.airports.features.createairport.AirportCreatedDomainEvent",
+      "io.bookingmonolith.flight.airports.features.createairport.CreateAirportCommand",
+      "io.bookingmonolith.flight.airports.features.createairport.CreateAirportCommandHandler",
+      "io.bookingmonolith.flight.airports.features.createairport.CreateAirportCommandValidator",
+      "io.bookingmonolith.flight.airports.features.createairport.CreateAirportController",
+      "io.bookingmonolith.flight.airports.features.createairport.CreateAirportRequestDto",
+      "io.bookingmonolith.flight.airports.features.Mappings",
+      "io.bookingmonolith.flight.airports.models.Airport",
+      "io.bookingmonolith.flight.airports.valueobjects.Address",
+      "io.bookingmonolith.flight.airports.valueobjects.AirportId",
+      "io.bookingmonolith.flight.airports.valueobjects.Code",
+      "io.bookingmonolith.flight.airports.valueobjects.Name",
+      "io.bookingmonolith.flight.data.jpa.entities.AircraftEntity",
+      "io.bookingmonolith.flight.data.jpa.entities.AirportEntity",
+      "io.bookingmonolith.flight.data.jpa.entities.FlightEntity",
+      "io.bookingmonolith.flight.data.jpa.entities.SeatEntity",
+      "io.bookingmonolith.flight.data.jpa.repositories.AircraftRepository",
+      "io.bookingmonolith.flight.data.jpa.repositories.AirportRepository",
+      "io.bookingmonolith.flight.data.jpa.repositories.FlightRepository",
+      "io.bookingmonolith.flight.data.jpa.repositories.SeatRepository",
+      "io.bookingmonolith.flight.data.jpa.seeds.FlightDataSeeder",
+      "io.bookingmonolith.flight.data.jpa.seeds.InitialData",
+      "io.bookingmonolith.flight.flights.dtos.FlightDto",
+      "io.bookingmonolith.flight.flights.enums.FlightStatus",
+      "io.bookingmonolith.flight.flights.exceptions.FlightAlreadyExistException",
+      "io.bookingmonolith.flight.flights.exceptions.FlightException",
+      "io.bookingmonolith.flight.flights.exceptions.FlightNotFoundException",
+      "io.bookingmonolith.flight.flights.features.createflight.CreateFlightCommand",
+      "io.bookingmonolith.flight.flights.features.createflight.CreateFlightCommandHandler",
+      "io.bookingmonolith.flight.flights.features.createflight.CreateFlightCommandValidator",
+      "io.bookingmonolith.flight.flights.features.createflight.CreateFlightController",
+      "io.bookingmonolith.flight.flights.features.createflight.CreateFlightRequestDto",
+      "io.bookingmonolith.flight.flights.features.createflight.FlightCreatedDomainEvent",
+      "io.bookingmonolith.flight.flights.features.deleteflight.DeleteFlightCommand",
+      "io.bookingmonolith.flight.flights.features.deleteflight.DeleteFlightCommandHandler",
+      "io.bookingmonolith.flight.flights.features.deleteflight.DeleteFlightCommandValidator",
+      "io.bookingmonolith.flight.flights.features.deleteflight.DeleteFlightController",
+      "io.bookingmonolith.flight.flights.features.deleteflight.FlightDeletedDomainEvent",
+      "io.bookingmonolith.flight.flights.features.getavailableflights.GetAvailableFlightsController",
+      "io.bookingmonolith.flight.flights.features.getavailableflights.GetAvailableFlightsQuery",
+      "io.bookingmonolith.flight.flights.features.getavailableflights.GetAvailableFlightsQueryHandler",
+      "io.bookingmonolith.flight.flights.features.getflightbyid.GetFlightByIdController",
+      "io.bookingmonolith.flight.flights.features.getflightbyid.GetFlightByIdQuery",
+      "io.bookingmonolith.flight.flights.features.getflightbyid.GetFlightByIdQueryHandler",
+      "io.bookingmonolith.flight.flights.features.getflightbyid.GetFlightByIdQueryValidator",
+      "io.bookingmonolith.flight.flights.features.Mappings",
+      "io.bookingmonolith.flight.flights.features.updateflight.FlightUpdatedDomainEvent",
+      "io.bookingmonolith.flight.flights.features.updateflight.UpdateFlightCommand",
+      "io.bookingmonolith.flight.flights.features.updateflight.UpdateFlightCommandHandler",
+      "io.bookingmonolith.flight.flights.features.updateflight.UpdateFlightCommandValidator",
+      "io.bookingmonolith.flight.flights.features.updateflight.UpdateFlightController",
+      "io.bookingmonolith.flight.flights.features.updateflight.UpdateFlightRequestDto",
+      "io.bookingmonolith.flight.flights.models.Flight",
+      "io.bookingmonolith.flight.flights.valueobjects.ArriveDate",
+      "io.bookingmonolith.flight.flights.valueobjects.DepartureDate",
+      "io.bookingmonolith.flight.flights.valueobjects.DurationMinutes",
+      "io.bookingmonolith.flight.flights.valueobjects.FlightDate",
+      "io.bookingmonolith.flight.flights.valueobjects.FlightId",
+      "io.bookingmonolith.flight.flights.valueobjects.FlightNumber",
+      "io.bookingmonolith.flight.flights.valueobjects.Price",
+      "io.bookingmonolith.flight.seats.dtos.SeatDto",
+      "io.bookingmonolith.flight.seats.enums.SeatClass",
+      "io.bookingmonolith.flight.seats.enums.SeatType",
+      "io.bookingmonolith.flight.seats.exceptions.SeatAlreadyExistException",
+      "io.bookingmonolith.flight.seats.exceptions.SeatNumberAlreadyReservedException",
+      "io.bookingmonolith.flight.seats.features.createseat.CrateSeatCommandHandler",
+      "io.bookingmonolith.flight.seats.features.createseat.CreateSeatCommand",
+      "io.bookingmonolith.flight.seats.features.createseat.CreateSeatCommandValidator",
+      "io.bookingmonolith.flight.seats.features.createseat.CreateSeatRequestDto",
+      "io.bookingmonolith.flight.seats.features.createseat.CreatSeatController",
+      "io.bookingmonolith.flight.seats.features.createseat.SeatCreatedDomainEvent",
+      "io.bookingmonolith.flight.seats.features.getavailableseats.GetAvailableSeatsController",
+      "io.bookingmonolith.flight.seats.features.getavailableseats.GetAvailableSeatsQuery",
+      "io.bookingmonolith.flight.seats.features.getavailableseats.GetAvailableSeatsQueryHandler",
+      "io.bookingmonolith.flight.seats.features.getavailableseats.GetAvailableSeatsQueryValidator",
+      "io.bookingmonolith.flight.seats.features.Mappings",
+      "io.bookingmonolith.flight.seats.features.reserveseat.ReserveSeatCommand",
+      "io.bookingmonolith.flight.seats.features.reserveseat.ReserveSeatCommandHandler",
+      "io.bookingmonolith.flight.seats.features.reserveseat.ReserveSeatCommandValidator",
+      "io.bookingmonolith.flight.seats.features.reserveseat.ReserveSeatController",
+      "io.bookingmonolith.flight.seats.features.reserveseat.ReserveSeatRequestDto",
+      "io.bookingmonolith.flight.seats.features.reserveseat.SeatReservedDomainEvent",
+      "io.bookingmonolith.flight.seats.models.Seat",
+      "io.bookingmonolith.flight.seats.valueobjects.FlightId",
+      "io.bookingmonolith.flight.seats.valueobjects.SeatId",
+      "io.bookingmonolith.flight.seats.valueobjects.SeatNumber"
+    ],
+    "removed": [
+      {
+        "class": "io.bookingmonolith.flight.FlightApplication",
+        "reason": "微服务启动类，单体中由 MonolithApplication 替代"
+      },
+      {
+        "class": "io.bookingmonolith.flight.FlightConfigurations",
+        "reason": "微服务配置类，单体中由 MonolithConfigurations 替代"
+      },
+      {
+        "class": "io.bookingmonolith.flight.EventMapperImpl",
+        "reason": "服务级 EventMapper，单体中合并为统一的 io.bookingmonolith.EventMapperImpl"
+      },
+      {
+        "class": "io.bookingmonolith.flight.grpcserver.FlightServiceGrpcImpl",
+        "reason": "gRPC 服务端实现，单体中不需要 gRPC，booking 模块通过 Mediator 直接调用 flight 的 QueryHandler"
+      }
+    ],
+    "modifiedClasses": [
+      {
+        "class": "io.bookingmonolith.flight.flights.features.Mappings",
+        "change": "删除了 toFlightResponseDtoGrpc() 和 toFlightStatusGrpc() 两个 gRPC 映射方法，移除了 ProtobufUtils 导入"
+      },
+      {
+        "class": "io.bookingmonolith.flight.seats.features.Mappings",
+        "change": "删除了 toSeatResponseDtoGrpc()、toSeatClassGrpc()、toSeatTypeGrpc() 三个 gRPC 映射方法"
+      }
+    ]
+  },
+
+  "passenger-service": {
+    "migrated": [
+      "io.bookingmonolith.passenger.data.jpa.entities.PassengerEntity",
+      "io.bookingmonolith.passenger.data.jpa.repositories.PassengerRepository",
+      "io.bookingmonolith.passenger.data.jpa.seeds.InitialPassengerData",
+      "io.bookingmonolith.passenger.data.jpa.seeds.PassengerDataSeeder",
+      "io.bookingmonolith.passenger.passengers.dtos.PassengerDto",
+      "io.bookingmonolith.passenger.passengers.enums.PassengerType",
+      "io.bookingmonolith.passenger.passengers.exceptions.PassengerAlreadyExistException",
+      "io.bookingmonolith.passenger.passengers.exceptions.PassengerNotFoundException",
+      "io.bookingmonolith.passenger.passengers.features.createpassenger.CreatePassengerCommand",
+      "io.bookingmonolith.passenger.passengers.features.createpassenger.CreatePassengerCommandHandler",
+      "io.bookingmonolith.passenger.passengers.features.createpassenger.CreatePassengerCommandValidator",
+      "io.bookingmonolith.passenger.passengers.features.createpassenger.CreatePassengerRequestDto",
+      "io.bookingmonolith.passenger.passengers.features.createpassenger.PassengerController",
+      "io.bookingmonolith.passenger.passengers.features.createpassenger.PassengerCreatedDomainEvent",
+      "io.bookingmonolith.passenger.passengers.features.getpassengerbyid.GetPassengerByIdController",
+      "io.bookingmonolith.passenger.passengers.features.getpassengerbyid.GetPassengerByIdQuery",
+      "io.bookingmonolith.passenger.passengers.features.getpassengerbyid.GetPassengerByIdQueryHandler",
+      "io.bookingmonolith.passenger.passengers.features.getpassengerbyid.GetPassengerByIdQueryValidator",
+      "io.bookingmonolith.passenger.passengers.features.Mappings",
+      "io.bookingmonolith.passenger.passengers.models.Passenger",
+      "io.bookingmonolith.passenger.passengers.valueobjects.Age",
+      "io.bookingmonolith.passenger.passengers.valueobjects.Name",
+      "io.bookingmonolith.passenger.passengers.valueobjects.PassengerId",
+      "io.bookingmonolith.passenger.passengers.valueobjects.PassportNumber"
+    ],
+    "removed": [
+      {
+        "class": "io.bookingmonolith.passenger.PassengerApplication",
+        "reason": "微服务启动类，单体中由 MonolithApplication 替代"
+      },
+      {
+        "class": "io.bookingmonolith.passenger.PassengerConfigurations",
+        "reason": "微服务配置类，单体中由 MonolithConfigurations 替代"
+      },
+      {
+        "class": "io.bookingmonolith.passenger.EventMapperImpl",
+        "reason": "服务级 EventMapper，单体中合并为统一的 io.bookingmonolith.EventMapperImpl"
+      },
+      {
+        "class": "io.bookingmonolith.passenger.grpcserver.PassengerServiceGrpcImpl",
+        "reason": "gRPC 服务端实现，单体中不需要 gRPC"
+      }
+    ],
+    "modifiedClasses": [
+      {
+        "class": "io.bookingmonolith.passenger.passengers.features.Mappings",
+        "change": "删除了 toPassengerResponseDtoGrpc() 和 toPassengerTypeGrpc() 两个 gRPC 映射方法"
+      }
+    ]
+  },
+
+  "booking-service": {
+    "migrated": [
+      "io.bookingmonolith.booking.bookings.dtos.BookingDto",
+      "io.bookingmonolith.booking.bookings.exceptions.BookingAlreadyExistException",
+      "io.bookingmonolith.booking.bookings.exceptions.FlightNotFoundException",
+      "io.bookingmonolith.booking.bookings.exceptions.PassengerNotFoundException",
+      "io.bookingmonolith.booking.bookings.exceptions.SeatNumberIsNotAvailableException",
+      "io.bookingmonolith.booking.bookings.features.createbooking.BookingCreatedDomainEvent",
+      "io.bookingmonolith.booking.bookings.features.createbooking.CreateBookingCommand",
+      "io.bookingmonolith.booking.bookings.features.createbooking.CreateBookingCommandHandler",
+      "io.bookingmonolith.booking.bookings.features.createbooking.CreateBookingCommandValidator",
+      "io.bookingmonolith.booking.bookings.features.createbooking.CreateBookingController",
+      "io.bookingmonolith.booking.bookings.features.createbooking.CreateBookingRequestDto",
+      "io.bookingmonolith.booking.bookings.features.Mappings",
+      "io.bookingmonolith.booking.bookings.modles.Booking",
+      "io.bookingmonolith.booking.bookings.valueobjects.BookingId",
+      "io.bookingmonolith.booking.bookings.valueobjects.PassengerInfo",
+      "io.bookingmonolith.booking.bookings.valueobjects.Trip",
+      "io.bookingmonolith.booking.data.jpa.entities.BookingEntity",
+      "io.bookingmonolith.booking.data.jpa.repositories.BookingRepository",
+      "io.bookingmonolith.booking.listeners.FlightDeletedListener",
+      "io.bookingmonolith.booking.listeners.FlightUpdatedListener"
+    ],
+    "removed": [
+      {
+        "class": "io.bookingmonolith.booking.BookingApplication",
+        "reason": "微服务启动类，单体中由 MonolithApplication 替代"
+      },
+      {
+        "class": "io.bookingmonolith.booking.BookingConfigurations",
+        "reason": "微服务配置类，单体中由 MonolithConfigurations 替代"
+      },
+      {
+        "class": "io.bookingmonolith.booking.EventMapperImpl",
+        "reason": "服务级 EventMapper，单体中合并为统一的 io.bookingmonolith.EventMapperImpl"
+      },
+      {
+        "class": "io.bookingmonolith.booking.grpcclient.GrpcClientsConfiguration",
+        "reason": "gRPC 客户端配置，单体中不需要 gRPC，改为 Mediator 直接调用"
+      }
+    ],
+    "modifiedClasses": [
+      {
+        "class": "io.bookingmonolith.booking.bookings.features.createbooking.CreateBookingCommandHandler",
+        "change": "移除 gRPC FlightServiceBlockingStub 和 PassengerServiceBlockingStub 依赖，改为注入 IMediator；4 个 gRPC 调用替换为 mediator.send() 本地调用；返回类型从 protobuf DTO 改为 domain DTO (FlightDto/PassengerDto/SeatDto)"
+      },
+      {
+        "class": "io.bookingmonolith.booking.bookings.features.Mappings",
+        "change": "删除了 toFlightGetByIdRequestDto()、toPassengerGetByIdRequestDto()、toGetAvailableSeatsResponseDto()、toReserveSeatRequestDto() 四个 gRPC 请求构建方法"
+      },
+      {
+        "class": "io.bookingmonolith.booking.listeners.FlightUpdatedListener",
+        "change": "从 implements MessageHandler<FlightUpdated> 改为使用 @EventListener 注解，不再依赖 RabbitMQ"
+      },
+      {
+        "class": "io.bookingmonolith.booking.listeners.FlightDeletedListener",
+        "change": "从 implements MessageHandler<FlightDeleted> 改为使用 @EventListener 注解，不再依赖 RabbitMQ"
+      }
+    ]
+  },
+
+  "api-gateway": {
+    "migrated": [],
+    "removed": [
+      {
+        "class": "io.bookingmonolith.apigateway.ApiGatewayApplication",
+        "reason": "API Gateway 在单体中完全不需要，路由功能已内聚到单一应用"
+      },
+      {
+        "class": "io.bookingmonolith.apigateway.KeycloakGatewayConfiguration",
+        "reason": "Gateway 安全配置，单体中由 buildingblocks.keycloak.KeycloakConfiguration 统一处理"
+      }
+    ],
+    "modifiedClasses": []
+  },
+
+  "monolith-new-classes": {
+    "_description": "单体架构中新增的类（替代微服务中各服务独立的启动/配置/事件映射类）",
+    "classes": [
+      {
+        "class": "io.bookingmonolith.MonolithApplication",
+        "replaces": [
+          "io.bookingmonolith.flight.FlightApplication",
+          "io.bookingmonolith.passenger.PassengerApplication",
+          "io.bookingmonolith.booking.BookingApplication",
+          "io.bookingmonolith.apigateway.ApiGatewayApplication"
+        ]
+      },
+      {
+        "class": "io.bookingmonolith.MonolithConfigurations",
+        "replaces": [
+          "io.bookingmonolith.flight.FlightConfigurations",
+          "io.bookingmonolith.passenger.PassengerConfigurations",
+          "io.bookingmonolith.booking.BookingConfigurations",
+          "io.bookingmonolith.apigateway.KeycloakGatewayConfiguration"
+        ]
+      },
+      {
+        "class": "io.bookingmonolith.EventMapperImpl",
+        "replaces": [
+          "io.bookingmonolith.flight.EventMapperImpl",
+          "io.bookingmonolith.passenger.EventMapperImpl",
+          "io.bookingmonolith.booking.EventMapperImpl"
+        ]
+      }
+    ]
+  }
+}

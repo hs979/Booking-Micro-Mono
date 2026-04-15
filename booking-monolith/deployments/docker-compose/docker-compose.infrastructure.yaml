@@ -1,0 +1,47 @@
+name: booking-monolith
+
+services:
+  #######################################################
+  #  PostgreSQL
+  #######################################################
+  postgres:
+    image: postgres:16
+    container_name: booking-monolith-postgres
+    restart: unless-stopped
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=booking_monolith
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - monolith-infra
+
+  #######################################################
+  #  Keycloak
+  #######################################################
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.0
+    container_name: booking-monolith-keycloak
+    restart: unless-stopped
+    command: start-dev --import-realm
+    environment:
+      - KC_DB=dev-file
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./keycloak-realm-export.json:/opt/keycloak/data/import/keycloak-realm-export.json
+    networks:
+      - monolith-infra
+
+networks:
+  monolith-infra:
+    name: monolith-infra
+    driver: bridge
+
+volumes:
+  postgres-data:
